@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<?grc format='1' created='3.7.10'?>
+<?grc format='1' created='3.7.11'?>
 <flow_graph>
   <timestamp>Sat Dec 31 15:46:07 2016</timestamp>
   <block>
@@ -2028,61 +2028,6 @@
     </param>
   </block>
   <block>
-    <key>fosphor_wx_sink_c</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>freq_center</key>
-      <value>fm_channel_freq</value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(416, 8)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>grid_pos</key>
-      <value></value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>fosphor_wx_sink_c_0</value>
-    </param>
-    <param>
-      <key>notebook</key>
-      <value>notebook_radio,0</value>
-    </param>
-    <param>
-      <key>freq_span</key>
-      <value>samp_rate</value>
-    </param>
-    <param>
-      <key>win_size</key>
-      <value></value>
-    </param>
-    <param>
-      <key>wintype</key>
-      <value>window.WIN_BLACKMAN_hARRIS</value>
-    </param>
-  </block>
-  <block>
     <key>low_pass_filter</key>
     <param>
       <key>beta</key>
@@ -2432,12 +2377,6 @@
   <connection>
     <source_block_id>fm_osmosdr_source</source_block_id>
     <sink_block_id>blocks_multiply_xx_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>fm_osmosdr_source</source_block_id>
-    <sink_block_id>fosphor_wx_sink_c_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: FM Radio
-# Generated: Sat Jan  7 21:57:54 2017
+# Generated: Thu Feb 22 17:16:05 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -21,7 +21,6 @@ from gnuradio import audio
 from gnuradio import blocks
 from gnuradio import eng_notation
 from gnuradio import filter
-from gnuradio import fosphor
 from gnuradio import gr
 from gnuradio import wxgui
 from gnuradio.eng_option import eng_option
@@ -132,12 +131,6 @@ class top_block(grc_wxgui.top_block_gui):
         )
         self.low_pass_filter_0 = filter.fir_filter_ccf(int(samp_rate/fm_channel_width), firdes.low_pass(
         	1, samp_rate, 75e3, 25e3, firdes.WIN_HAMMING, 6.76))
-        self.fosphor_wx_sink_c_0 = fosphor.wx_sink_c(
-        	self.notebook_radio.GetPage(0).GetWin()
-        )
-        self.fosphor_wx_sink_c_0.set_fft_window(window.WIN_BLACKMAN_hARRIS)
-        self.fosphor_wx_sink_c_0.set_frequency_range(fm_channel_freq, samp_rate)
-        self.notebook_radio.GetPage(0).Add(self.fosphor_wx_sink_c_0.win)
         self.fm_osmosdr_source = osmosdr.source( args="numchan=" + str(1) + " " + '' )
         self.fm_osmosdr_source.set_sample_rate(samp_rate)
         self.fm_osmosdr_source.set_center_freq(fm_channel_freq, 0)
@@ -150,7 +143,7 @@ class top_block(grc_wxgui.top_block_gui):
         self.fm_osmosdr_source.set_bb_gain(20, 0)
         self.fm_osmosdr_source.set_antenna('', 0)
         self.fm_osmosdr_source.set_bandwidth(0, 0)
-          
+
         self.blocks_multiply_xx_0 = blocks.multiply_vcc(1)
         self.blocks_multiply_const_vxx_0 = blocks.multiply_const_vff((fm_audio_gain, ))
         self.audio_sink_0 = audio.sink(48000, '', True)
@@ -163,15 +156,14 @@ class top_block(grc_wxgui.top_block_gui):
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 1))    
-        self.connect((self.analog_wfm_rcv_0, 0), (self.blocks_multiply_const_vxx_0, 0))    
-        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.audio_sink_0, 0))    
-        self.connect((self.blocks_multiply_xx_0, 0), (self.low_pass_filter_0, 0))    
-        self.connect((self.fm_osmosdr_source, 0), (self.blocks_multiply_xx_0, 0))    
-        self.connect((self.fm_osmosdr_source, 0), (self.fosphor_wx_sink_c_0, 0))    
-        self.connect((self.fm_osmosdr_source, 0), (self.wxgui_fftsink2_0, 0))    
-        self.connect((self.low_pass_filter_0, 0), (self.rational_resampler_xxx_0, 0))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.analog_wfm_rcv_0, 0))    
+        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_multiply_xx_0, 1))
+        self.connect((self.analog_wfm_rcv_0, 0), (self.blocks_multiply_const_vxx_0, 0))
+        self.connect((self.blocks_multiply_const_vxx_0, 0), (self.audio_sink_0, 0))
+        self.connect((self.blocks_multiply_xx_0, 0), (self.low_pass_filter_0, 0))
+        self.connect((self.fm_osmosdr_source, 0), (self.blocks_multiply_xx_0, 0))
+        self.connect((self.fm_osmosdr_source, 0), (self.wxgui_fftsink2_0, 0))
+        self.connect((self.low_pass_filter_0, 0), (self.rational_resampler_xxx_0, 0))
+        self.connect((self.rational_resampler_xxx_0, 0), (self.analog_wfm_rcv_0, 0))
 
     def get_fm_center_freq(self):
         return self.fm_center_freq
@@ -188,7 +180,6 @@ class top_block(grc_wxgui.top_block_gui):
         self.samp_rate = samp_rate
         self.wxgui_fftsink2_0.set_sample_rate(self.samp_rate)
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 75e3, 25e3, firdes.WIN_HAMMING, 6.76))
-        self.fosphor_wx_sink_c_0.set_frequency_range(self.fm_channel_freq, self.samp_rate)
         self.fm_osmosdr_source.set_sample_rate(self.samp_rate)
         self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
 
@@ -218,7 +209,6 @@ class top_block(grc_wxgui.top_block_gui):
         self._fm_channel_freq_slider.set_value(self.fm_channel_freq)
         self._fm_channel_freq_text_box.set_value(self.fm_channel_freq)
         self.wxgui_fftsink2_0.set_baseband_freq(self.fm_channel_freq)
-        self.fosphor_wx_sink_c_0.set_frequency_range(self.fm_channel_freq, self.samp_rate)
         self.fm_osmosdr_source.set_center_freq(self.fm_channel_freq, 0)
         self.analog_sig_source_x_0.set_frequency(self.fm_center_freq - self.fm_channel_freq)
 
